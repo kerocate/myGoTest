@@ -1,9 +1,9 @@
 let divConsole = document.querySelector('#console')
-divConsole.log = (text,lineNumber) => {
-    divConsole.innerHTML += "["+window.Date().slice(16,24)+"] "+ String(text +" —— [ line: "+lineNumber+ " ]</br>");
+divConsole.log = (text,lineNumber="") => {
+    divConsole.innerHTML += "["+window.Date().slice(16,24)+"] "+"[ line: "+lineNumber+" ]" + String(text +"</br>");
 }
-divConsole.error = (text,lineNumber) => {
-  divConsole.innerHTML += "<em>["+window.Date().slice(16,24)+"] "+ String(text +" —— [ line: "+lineNumber+ " ]</em></br>");
+divConsole.error = (text) => {
+  divConsole.innerHTML += "<em>["+window.Date().slice(16,24)+"] "+ String(text+"</em></br>");
 }
 
 
@@ -23,14 +23,14 @@ if ("geolocation" in navigator) {
   function success(pos) {
     var crd = pos.coords;
   
-    divConsole.log('Your current position is:',"function success 23");
-    divConsole.log('Latitude : ' + crd.latitude,"function success 24");
-    divConsole.log('Longitude: ' + crd.longitude,"function success 25");
-    divConsole.log('More or less ' + crd.accuracy + ' meters.',"function success 26");
+    divConsole.log('你的位置 :');
+    divConsole.log('纬度 : ' + crd.latitude);
+    divConsole.log('经度 : ' + crd.longitude);
+    divConsole.log('正负 ' + crd.accuracy + ' 米.');
   };
   
   function error(err) {
-    divConsole.error('ERROR(' + err.code + '): ' + err.message,"function error 30");
+    divConsole.error('ERROR(' + err.code + '): ' + err.message);
   };
   
   navigator.geolocation.getCurrentPosition(success, error, options);
