@@ -8,13 +8,42 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
         em{
             color: red;
+        }
+        button{
+            width: 33%;
+            height: 15vw;
+        }
+        color-tag{
+            color: white;
+            background-color: coral;
+        }
+        #tagName{
+            width: 100%;
+            height: 8vh;
+            margin-top: 16vw;
+            font-size: 8vw;
+            padding-left: 2vw;
+        }
+        #console{
+            position: absolute;
         }
     </style>
 </head>
 
 <body>
+    <div style="position: absolute; display: flex; width: 100%; justify-content: space-between;">
+        <button id="startWatcher" onclick="startWatch()">开始监控</button>
+        <button id="stopWatcher" onclick="stopWatch(watcherID)">停止监控</button>
+        <button id="tagSetter" onclick="setTag()">打标签</button>
+    </div>
+    <input type="text" name="tagName" id="tagName" placeholder="地址标签">
+    <br>
     <div id="console"></div>
 </body>
 <script src='main.js'></script>

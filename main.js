@@ -1,11 +1,14 @@
+let watcherID = null;
 let divConsole = document.querySelector('#console')
 divConsole.log = (text,lineNumber="") => {
     divConsole.innerHTML += "["+window.Date().slice(16,24)+"] "+"[ line: "+lineNumber+" ]" + String(text +"</br>");
-}
+};
 divConsole.error = (text) => {
   divConsole.innerHTML += "<em>["+window.Date().slice(16,24)+"] "+ String(text+"</em></br>");
-}
-
+};
+divConsole.tag = (text) => {
+  divConsole.innerHTML += "<color-tag>["+window.Date().slice(16,24)+"] "+ String(text+"</color-tag></br>");
+};
 
 
 if ("geolocation" in navigator) {
@@ -22,11 +25,11 @@ if ("geolocation" in navigator) {
   
   function success(pos) {
     var crd = pos.coords;
-  
+    divConsole.log("");
     divConsole.log('你的位置 :');
     divConsole.log('纬度 : ' + crd.latitude);
     divConsole.log('经度 : ' + crd.longitude);
-    divConsole.log('正负 ' + crd.accuracy + ' 米.');
+    divConsole.log('误差 : ±' + crd.accuracy + ' 米.');
   };
   
   function error(err) {
@@ -34,4 +37,22 @@ if ("geolocation" in navigator) {
   };
   
   navigator.geolocation.getCurrentPosition(success, error, options);
-  navigator.geolocation.watchPosition(success, error, options);
+  startWatch();
+
+function stopWatch(id) {
+  navigator.geolocation.clearWatch(id);
+  watcherID = null;
+}
+function startWatch() {
+  if (watcherID !== null) {
+    divConsole.log("已经在监控");
+    return;
+  }else{
+    let id = navigator.geolocation.watchPosition(success, error, options);
+    watcherID = id;
+  }
+}
+function setTag() {
+  let element = document.querySelector('#tagName')
+  divConsole.tag(element.value);
+}
