@@ -2,12 +2,15 @@ let watcherID = null;
 let divConsole = document.querySelector('#console')
 divConsole.log = (text,lineNumber="") => {
     divConsole.innerHTML += "["+window.Date().slice(16,24)+"] "+"[ line: "+lineNumber+" ]" + String(text +"</br>");
+    divConsole.scrollBy(0,100);
 };
 divConsole.error = (text) => {
   divConsole.innerHTML += "<em>["+window.Date().slice(16,24)+"] "+ String(text+"</em></br>");
+  divConsole.scrollBy(0,100);
 };
 divConsole.tag = (text) => {
   divConsole.innerHTML += "<color-tag>["+window.Date().slice(16,24)+"] "+ String(text+"</color-tag></br>");
+  divConsole.scrollBy(0,100);
 };
 
 
